@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
    FILES
-   attitude.msg
+   Point2D.msg
 )
 generate_messages(
    DEPENDENCIES
@@ -30,3 +30,12 @@ include_directories(
    include
    ${catkin_INCLUDE_DIRS}
 )
+
+FILE(GLOB SOURCE_FILES *.hpp *.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+        )
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
